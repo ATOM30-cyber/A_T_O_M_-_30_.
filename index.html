@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <style>
+        body { background: #000; margin: 0; display: flex; justify-content: center; align-items: center; height: 100vh; overflow: hidden; }
+        #_gate { color: #050505; text-decoration: none; font-family: monospace; font-size: 10px; pointer-events: none; }
+    </style>
+</head>
+<body>
+    <a href="#" id="_gate">NULL</a>
+    <script>
+        const _0x1a2b = ['\x4b\x65\x72\x6e\x65\x6c\x2e\x70\x79'];
+        let _seq = "";
+        window.addEventListener('keydown', (e) => {
+            _seq += e.key.toUpperCase();
+            if (_seq.endsWith("ATOM")) {
+                const g = document.getElementById('_gate');
+                g.href = _0x1a2b[0];
+                g.style.color = "#111";
+                g.style.pointerEvents = "all";
+                g.innerText = "PROCEED";
+            }
+        });
+    </script>
+</body>
+</html>
