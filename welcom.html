@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en">
+<script>
+    // ACCESS CONTROL PROTOCOL
+    const urlParams = new URLSearchParams(window.location.search);
+    const hasAuth = urlParams.get('auth') === 'true';
+    if (sessionStorage.getItem("ATOM_ACCESS_TOKEN") !== "VERIFIED_USER_30" && !hasAuth) {
+        alert("ACCESS_DENIED: UNAUTHORIZED_ENTRY");
+        window.location.href = "index.html"; 
+    }
+</script>
+<head>
+    <meta charset="UTF-8">
+    <title>ATOM | GHOST_CHAT</title>
+    <style>
+        body { background: #000; color: #00ff41; font-family: 'Courier New', monospace; margin: 0; display: flex; flex-direction: column; height: 100vh; }
+        .chat-header { padding: 15px; border-bottom: 1px solid #00ff41; text-align: center; font-weight: bold; background: rgba(0,255,65,0.05); letter-spacing: 2px; }
+        
+        #chat-box { flex: 1; overflow-y: auto; padding: 20px; display: flex; flex-direction: column; gap: 15px; }
+        
+        .msg { max-width: 80%; padding: 12px; border: 1px solid #004400; position: relative; border-radius: 2px; line-height: 1.4; word-wrap: break-word; }
+        .msg.sent { align-self: flex-end; background: #001a00; border-color: #00ff41; }
+        .msg.received { align-self: flex-start; background: #050505; border-color: #004400; }
+        
+        .sender-tag { display: block; font-size: 0.7rem; color: #008f11; margin-bottom: 5px; font-weight: bold; }
+        .rank { color: #fff; margin-left: 5px; font-size: 0.6rem; border: 1px solid #fff; padding: 0 3px; }
+
+        /* RANK STYLING */
+        .rank.founder { color: #ff0000; border-color: #ff0000; box-shadow: 0 0 5px #ff0000; }
+        .rank.agent { color: #00ff41; border-color: #00ff41; }
+        .sender-tag.founder-name { color: #ff0000 !important; text-shadow: 0 0 5px #ff0000; font-weight: bold; }
+
+        /* MESSAGE CONTROL INTERFACE */
+        .msg-actions { display: none; position: absolute; top: -10px; right: 5px; gap: 5px; }
+        .msg.sent:hover .msg-actions { display: flex; }
+        .action-btn { background: #000; border: 1px solid #00ff41; color: #00ff41; font-size: 10px; padding: 2px 5px; cursor: pointer; }
+        .action-btn.delete { border-color: #ff0000; color: #ff0000; }
+        .edited-tag { font-size: 9px; color: #008f11; margin-left: 5px; font-style: italic; }
+
+        .input-area { padding: 20px; display: flex; gap: 10px; border-top: 1px solid #004400; background: #000; }
+        input { flex: 1; background: #000; border: 1px solid #00ff41; color: #00ff41; padding: 12px; outline: none; }
+        button#sendBtn { background: #00ff41; color: #000; border: none; padding: 0 25px; cursor: pointer; font-weight: bold; }
+    </style>
+</head>
+<body>
+
+    <div class="chat-header">>> ATOM_GHOST_NETWORK [SECURE_NODE]</div>
+    
+    <div id="chat-box"></div>
+
+    <div class="input-area">
+        <input type="text" id="messageInput" placeholder="TYPE_ENCRYPTED_MESSAGE..." autocomplete="off">
+        <button id="sendBtn">SEND</button>
+    </div>
+
+    <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-database.js"></script>
+
+    <script>
+        const firebaseConfig = {
+            apiKey: "AIzaSyBp8XVk_7Ga-RCq-p8qGbDE0RYk4F7Nv-A",
+            authDomain: "atom-project-b365a.firebaseapp.com",
+            databaseURL: "https://atom-project-b365a-default-rtdb.firebaseio.com",
+            projectId: "atom-project-b365a",
+            storageBucket: "atom-project-b365a.firebasestorage.app",
+            messagingSenderId: "1091970425286",
+            appId: "1:1091970425286:web:accf6681e33115f8d3d2c7",
+            measurementId: "G-K6EJTBHX2J"
+        };
+        
+        firebase.initializeApp(firebaseConfig);
+        const database = firebase.database();
+        const userName = urlParams.get('user') || "Unknown_Agent";
+
+        function deleteMessage(id) {
+            if (confirm(">> EXECUTE_DELETE: ARE_YOU_SURE?")) {
+                database.ref('messages/' + id).remove().then(() => { location.reload(); });
+            }
+        }
+
+        function editMessage(id, oldText) {
+            const newText = prompt(">> UPDATE_ENCRYPTED_DATA:", oldText);
+            if (newText && newText !== oldText) {
+                const encrypted = btoa(unescape(encodeURIComponent(newText)));
+                database.ref('messages/' + id).update({ content: encrypted, edited: true }).then(() => { location.reload(); });
+            }
+        }
+
+        function sendMessage() {
+            const input = document.getElementById('messageInput');
+            const text = input.value.trim();
+            if (!text) return;
+            const encrypted = btoa(unescape(encodeURIComponent(text))); 
+            database.ref('messages/').push({ user: userName, content: encrypted, time: Date.now(), edited: false });
+            input.value = '';
+        }
+
+        database.ref('messages/').limitToLast(30).on('child_added', (snapshot) => {
+            const data = snapshot.val();
+            const msgId = snapshot.key;
+            try {
+                const decrypted = decodeURIComponent(escape(atob(data.content)));
+                appendMessage(decrypted, data.user === userName ? 'sent' : 'received', data.user, msgId, data.edited);
+            } catch(e) { console.error("DECRYPTION_ERROR", e); }
+        });
+
+        function appendMessage(text, type, sender, msgId, isEdited) {
+            const chatBox = document.getElementById('chat-box');
+            const msgDiv = document.createElement('div');
+            msgDiv.className = `msg ${type}`;
+            
+            // RANK LOGIC UPDATED FOR "Detective 001"
+            let rankName = "Agent";
+            let rankClass = "agent";
+            let nameClass = "";
+
+            if (sender === "Detective 001") {
+                rankName = "FOUNDER";
+                rankClass = "founder";
+                nameClass = "founder-name";
+            }
+
+            let actionsHtml = '';
+            if (type === 'sent') {
+                actionsHtml = `
+                    <div class="msg-actions">
+                        <button class="action-btn" onclick="editMessage('${msgId}', '${text.replace(/'/g, "\\'")}')">EDIT</button>
+                        <button class="action-btn delete" onclick="deleteMessage('${msgId}')">X</button>
+                    </div>`;
+            }
+
+            msgDiv.innerHTML = `
+                ${actionsHtml}
+                <span class="sender-tag ${nameClass}">${sender}<span class="rank ${rankClass}">[${rankName}]</span></span>
+                <span class="text-content">${text}</span>
+                ${isEdited ? '<span class="edited-tag">(edited)</span>' : ''}
+            `;
+            
+            chatBox.appendChild(msgDiv);
+            chatBox.scrollTop = chatBox.scrollHeight;
+        }
+
+        document.getElementById('sendBtn').addEventListener('click', sendMessage);
+        document.getElementById('messageInput').addEventListener('keypress', (e) => { if (e.key === 'Enter') sendMessage(); });
+    </script>
+</body>
+</html>
