@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="ar">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ATOM | THE FINAL VAULT</title>
+    <style>
+        body { 
+            background: #050505; 
+            color: #00ff41; 
+            font-family: 'Courier New', monospace; 
+            display: flex; 
+            justify-content: center; 
+            align-items: center; 
+            height: 100vh; 
+            margin: 0; 
+            overflow: hidden; 
+        }
+
+        .vault-container { 
+            border: 2px solid #00ff41; 
+            padding: 40px; 
+            box-shadow: 0 0 25px #00ff41; 
+            text-align: center; 
+            background: rgba(0, 255, 65, 0.02);
+            max-width: 400px;
+            width: 90%;
+        }
+
+        h1 { 
+            font-size: 1.4rem; 
+            letter-spacing: 3px; 
+            margin-bottom: 25px; 
+            text-shadow: 0 0 10px #00ff41; 
+        }
+
+        .input-group { margin-bottom: 15px; text-align: left; }
+        label { display: block; font-size: 0.8rem; margin-bottom: 5px; color: #008f11; }
+
+        input { 
+            background: rgba(0, 0, 0, 0.5); 
+            border: 1px solid #00ff41; 
+            color: #00ff41; 
+            padding: 12px; 
+            font-size: 1rem; 
+            text-align: center; 
+            outline: none; 
+            width: 100%; 
+            box-sizing: border-box;
+        }
+
+        button { 
+            background: #00ff41; 
+            color: #000; 
+            border: none; 
+            padding: 15px 40px; 
+            cursor: pointer; 
+            font-weight: bold; 
+            width: 100%;
+            margin-top: 10px;
+            transition: 0.3s; 
+        }
+
+        button:hover { 
+            background: #fff; 
+            box-shadow: 0 0 20px #fff; 
+        }
+
+        #status { 
+            margin-top: 20px; 
+            font-size: 0.9rem;
+            min-height: 20px; 
+        }
+
+        .glitch { animation: glitch 1.5s infinite; }
+        @keyframes glitch {
+            0% { transform: skew(0deg); }
+            20% { transform: skew(-1deg); }
+            40% { transform: skew(1deg); }
+            100% { transform: skew(0deg); }
+        }
+    </style>
+</head>
+<body>
+
+<div class="vault-container">
+    <h1 class="glitch">CORE_SECTOR_LOCK</h1>
+    
+    <div class="input-group">
+        <label>IDENTIFIER (USED IN C++):</label>
+        <input type="text" id="userName" placeholder="ENTER NAME" autocomplete="off">
+    </div>
+
+    <div class="input-group">
+        <label>UNIQUE ACCESS KEY:</label>
+        <input type="text" id="accessKey" placeholder="AT-XXXXXX" maxlength="9">
+    </div>
+
+    <button onclick="validateAccess()">INITIALIZE BREACH</button>
+    
+    <div id="status">SYSTEM_IDLE...</div>
+</div>
+
+<script>
+    // 1. استلام البيانات من رابط identity.html وتعبئتها تلقائياً
+    window.onload = function() {
+        const urlParams = new URLSearchParams(window.location.search);
+        const userParam = urlParams.get('user');
+        const keyParam = urlParams.get('key');
+
+        if (userParam) document.getElementById('userName').value = userParam;
+        if (keyParam) document.getElementById('accessKey').value = keyParam;
+    };
+
+    function generateExpectedKey(name) {
+        let hash = 0x811c9dc5;
+        for (let i = 0; i < name.length; i++) {
+            hash ^= name.charCodeAt(i);
+            hash = Math.imul(hash, 0x01000193);
+        }
+        return "AT-" + Math.abs(hash % 999999);
+    }
+
+    function validateAccess() {
+        const name = document.getElementById('userName').value.trim();
+        const userKey = document.getElementById('accessKey').value.trim();
+        const status = document.getElementById('status');
+
+        if (!name || !userKey) {
+            updateStatus("MISSING_DATA", "yellow");
+            return;
+        }
+
+        const expected = generateExpectedKey(name);
+
+        if (userKey === expected) {
+            updateStatus("BREACH_SUCCESSFUL. REDIRECTING...", "#fff");
+            document.querySelector('.vault-container').style.boxShadow = "0 0 40px #fff";
+            
+            // 2. زرع التوكن (ضروري جداً حتى صفحة welcom متطردك)
+            sessionStorage.setItem("ATOM_ACCESS_TOKEN", "VERIFIED_USER_30");
+            
+            setTimeout(() => {
+                // 3. التوجه لصفحة welcom.html (الاسم الصحيح لصفحتك)
+                window.location.href = `welcom.html?user=${encodeURIComponent(name)}&key=${encodeURIComponent(userKey)}&auth=true`; 
+            }, 2500);
+        } else {
+            updateStatus("ACCESS_DENIED: LOGIC_ERROR", "red");
+            document.querySelector('.vault-container').style.borderColor = "red";
+            
+            setTimeout(() => {
+                document.querySelector('.vault-container').style.borderColor = "#00ff41";
+                updateStatus("SYSTEM_IDLE...", "#00ff41");
+            }, 1500);
+        }
+    }
+
+    function updateStatus(msg, color) {
+        const status = document.getElementById('status');
+        status.innerText = msg;
+        status.style.color = color;
+    }
+</script>
+
+</body>
+</html>
