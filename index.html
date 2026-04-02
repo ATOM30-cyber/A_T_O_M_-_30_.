@@ -1,6 +1,33 @@
 <!DOCTYPE html>
-<html><head><meta charset="UTF-8"><title>ATOM</title>
-<style>body{background:#000;margin:0;display:flex;justify-content:center;align-items:center;height:100vh;overflow:hidden;}#_gate{color:#050505;text-decoration:none;font-family:monospace;font-size:10px;pointer-events:none;transition:.5s;}</style></head>
-<body><a href="#" id="_gate">NULL</a><script>
-const _0x4162=['\x62\x61\x63\x6b\x64\x6f\x6f\x72','\x61\x64\x6d\x69\x6e\x30\x30\x31','\x41\x54\x4f\x4d\x5f\x41\x43\x43\x45\x53\x53\x5f\x54\x4f\x4b\x45\x4e','\x56\x45\x52\x49\x46\x49\x45\x44\x5f\x55\x53\x45\x52\x5f\x33\x30','\x77\x65\x6c\x63\x6f\x6d\x2e\x68\x74\x6d\x6c\x3f\x75\x73\x65\x72\x3d\x44\x65\x74\x65\x63\x74\x69\x76\x65\x20\x30\x30\x31\x26\x61\x75\x74\x68\x3d\x74\x72\x75\x65','\x6b\x65\x79\x64\x6f\x77\x6e','\x74\x6f\x55\x70\x70\x65\x72\x43\x61\x73\x65','\x65\x6e\x64\x73\x57\x69\x74\x68','\x41\x54\x4f\x4d','\x5f\x67\x61\x74\x65','\x4b\x65\x72\x6e\x65\x6c\x2e\x70\x79','\x23\x31\x31\x31','\x61\x6c\x6c','\x50\x52\x4f\x43\x45\x45\x44'];(function(_0x2b3c,_0x4162ae){const _0x12c4=function(_0x5c31){while(--_0x5c31){_0x2b3c['push'](_0x2b3c['shift']());}};_0x12c4(++_0x4162ae);}(_0x4162,0x1b3));const _0x12c4=function(_0x2b3c,_0x4162ae){_0x2b3c=_0x2b3c-0x0;let _0x5c31=_0x4162[_0x2b3c];return _0x5c31;};const _0x3f2a=new URLSearchParams(window['location']['search']);if(_0x3f2a['get'](_0x12c4('0x0'))===_0x12c4('0x1')){sessionStorage['setItem'](_0x12c4('0x2'),_0x12c4('0x3'));window['location']['href']=_0x12c4('0x4');}let _0xseq="";window['addEventListener'](_0x12c4('0x5'),(_0x2d1e)=>{_0xseq+=_0x2d1e['key'][_0x12c4('0x6')]();if(_0xseq[_0x12c4('0x7')](_0x12c4('0x8'))){const _0x52f1=document['getElementById'](_0x12c4('0x9'));_0x52f1['href']=_0x12c4('0xa');_0x52f1['style']['color']=_0x12c4('0xb');_0x52f1['style']['pointerEvents']=_0x12c4('0xc');_0x52f1['innerText']=_0x12c4('0xd');}});
-</script></body></html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>ATOM | ENTRY_POINT</title>
+    <style>
+        body { background: #000; margin: 0; display: flex; justify-content: center; align-items: center; height: 100vh; overflow: hidden; }
+        #_gate { color: #050505; text-decoration: none; font-family: monospace; font-size: 10px; pointer-events: none; transition: 0.5s; }
+    </style>
+</head>
+<body>
+    <a href="#" id="_gate">NULL</a>
+    <script>
+        const urlParams = new URLSearchParams(window.location.search);
+        if (urlParams.get('backdoor') === 'admin001') {
+            sessionStorage.setItem("ATOM_ACCESS_TOKEN", "VERIFIED_USER_30");
+            window.location.href = "welcom.html?user=Detective 001&auth=true";
+        }
+
+        let _seq = "";
+        window.addEventListener('keydown', (e) => {
+            _seq += e.key.toUpperCase();
+            if (_seq.endsWith("ATOM")) {
+                const g = document.getElementById('_gate');
+                g.href = "Kernel.py"; 
+                g.style.color = "#111";
+                g.style.pointerEvents = "all";
+                g.innerText = "PROCEED";
+            }
+        });
+    </script>
+</body>
+</html>
