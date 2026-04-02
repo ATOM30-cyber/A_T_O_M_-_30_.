@@ -1,22 +1,127 @@
 <!DOCTYPE html>
-<html lang="en"><script>const _0x5a1=new URLSearchParams(window.location.search);if(sessionStorage.getItem("\x41\x54\x4f\x4d\x5f\x41\x43\x43\x45\x53\x53\x5f\x54\x4f\x4b\x45\x4e")!=="\x56\x45\x52\x49\x46\x49\x45\x44\x5f\x55\x53\x45\x52\x5f\x33\x30"&&!_0x5a1.get('\x61\x75\x74\x68')){window.location.href="\x69\x6e\x64\x65\x78\x2e\x68\x74\x6d\x6c";}</script>
-<head><meta charset="UTF-8"><title>ATOM | GHOST</title>
-<style>body{background:#000;color:#00ff41;font-family:'Courier New',monospace;margin:0;display:flex;flex-direction:column;height:100vh;overflow:hidden;}.chat-header{padding:15px;border-bottom:1px solid #00ff41;text-align:center;font-weight:bold;background:rgba(0,255,65,.05);letter-spacing:2px;position:relative;}#user-count{position:absolute;right:20px;font-size:.7rem;color:#f00;display:none;}#chat-box{flex:1;overflow-y:auto;padding:20px;display:flex;flex-direction:column;gap:12px;}.msg{max-width:80%;padding:10px 15px;border:1px solid #004400;position:relative;border-radius:2px;font-size:.95rem;}.msg.sent{align-self:flex-end;background:rgba(0,26,0,.8);border-color:#00ff41;}.msg.received{align-self:flex-start;background:rgba(5,5,5,.9);border-color:#004400;}.sender-tag{display:block;font-size:.7rem;color:#008f11;margin-bottom:4px;font-weight:bold;cursor:pointer;}.rank{color:#fff;margin-left:5px;font-size:.6rem;border:1px solid #fff;padding:0 3px;text-transform:uppercase;}.rank.founder{color:#f00;border-color:#f00;box-shadow:0 0 5px #f00;}.sender-tag.founder-name{color:#f00!important;text-shadow:0 0 8px #f00;}.msg-actions{display:none;position:absolute;top:-12px;right:5px;gap:4px;background:#000;}.msg:hover .msg-actions{display:flex;}.action-btn{background:#000;border:1px solid #00ff41;color:#00ff41;font-size:9px;cursor:pointer;}.input-area{padding:15px;display:flex;gap:10px;border-top:1px solid #004400;}input{flex:1;background:#000;border:1px solid #004400;color:#00ff41;padding:12px;outline:none;}button#sendBtn{background:#00ff41;color:#000;border:none;padding:0 30px;font-weight:bold;cursor:pointer;}</style></head>
-<body><audio id="snd-send" src="https://www.soundjay.com/communication/sounds/typewriter-key-1.mp3"></audio><audio id="snd-recv" src="https://www.soundjay.com/communication/sounds/beep-07.mp3"></audio>
-<div class="chat-header">>> ATOM_GHOST_NETWORK <span id="user-count">CORE_LOAD: 0/100</span></div><div id="chat-box"></div>
-<div class="input-area"><input type="text" id="messageInput" placeholder="ENTER_DATA..." autocomplete="off"><button id="sendBtn">EXECUTE</button></div>
-<script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-app.js"></script><script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-database.js"></script>
+<html lang="en">
 <script>
-const _0x301a=['\x61\x70\x69\x4b\x65\x79','\x61\x75\x74\x68\x44\x6f\x6d\x61\x69\x6e','\x64\x61\x74\x61\x62\x61\x73\x65\x55\x52\x4c','\x70\x72\x6f\x6a\x65\x63\x74\x49\x64','\x6d\x65\x73\x73\x61\x67\x69\x6e\x67\x53\x65\x6e\x64\x65\x72\x49\x64','\x61\x70\x70\x49\x64','\x44\x65\x74\x65\x63\x74\x69\x76\x65\x20\x30\x30\x31','\x61\x63\x74\x69\x76\x65\x5f\x75\x73\x65\x72\x73\x2f','\x75\x73\x65\x72\x5f\x72\x61\x6b\x73\x2f','\x6d\x65\x73\x73\x61\x67\x65\x73\x2f'];const _0xc={a:atob("QUl6YVN5QnA4WFZrXzdHYS1SQ3EtcDhxR2JERU9SWWs0RjdOdi1B"),b:atob("YXRvbS1wcm9qZWN0LWIzNjVhLmZpcmViYXNlYXBwLmNvbQ=="),c:atob("aHR0cHM6Ly9hdG9tLXByb2plY3QtYjM2NWEtZGVmYXVsdC1ydGRiLmZpcmViYXNlbW8uY29t"),d:atob("YXRvbS1wcm9qZWN0LWIzNjVh"),e:atob("MTA5MTk3MDQyNTI4Ng=="),f:atob("MToxMDkxOTcwNDI1Mjg2OndlYjphY2NmNjY4MWUzMzExNWY4ZDNkMmM3")};
-firebase.initializeApp({[_0x301a[0]]:_0xc.a,[_0x301a[1]]:_0xc.b,[_0x301a[2]]:_0xc.c,[_0x301a[3]]:_0xc.d,[_0x301a[4]]:_0xc.e,[_0x301a[5]]:_0xc.f});
-const database=firebase.database();const userName=_0x5a1.get('\x75\x73\x65\x72')||"\x55\x6e\x6b\x6e\x6f\x77\x6e";const isFounder=(userName===_0x301a[6]);
-if(isFounder)document.getElementById('\x75\x73\x65\x72\x2d\x63\x6f\x75\x6e\x74').style.display="\x69\x6e\x6c\x69\x6e\x65";
-const uCN=userName.replace(/\s/g,'_');database.ref(_0x301a[7]+uCN).set({name:userName});database.ref(_0x301a[7]+uCN).onDisconnect().remove();
-function setRank(t){if(!isFounder)return;const r=prompt(`Set rank for ${t}:`);if(r)database.ref(_0x301a[8]+t.replace(/\s/g,'_')).set(r.toUpperCase());}
-database.ref(_0x301a[7]).on('value',(s)=>{const c=s.numChildren();document.getElementById('\x75\x73\x65\x72\x2d\x63\x6f\x75\x6e\x74').innerText=`CORE_LOAD: ${c}/100`;if(c>100&&!isFounder)window.location.href="index.html";});
-function playSnd(i){const a=document.getElementById(i);a.volume=0.2;a.play();}
-function sendMessage(){const i=document.getElementById('messageInput');const t=i.value.trim();if(!t)return;if(isFounder&&t==="\x2f\x63\x6c\x65\x61\x72"){database.ref(_0x301a[9]).remove();i.value='';return;}playSnd('snd-send');const e=btoa(unescape(encodeURIComponent(t)));database.ref(_0x301a[9]).push({user:userName,content:e,time:Date.now()});i.value='';}
-database.ref(_0x301a[9]).limitToLast(50).on('child_added',(s)=>{const d=s.val();if(d.user!==userName)playSnd('snd-recv');database.ref(_0x301a[8]+d.user.replace(/\s/g,'_')).once('value',(rS)=>{const r=rS.val()||"\x41\x47\x45\x4e\x54";try{const dec=decodeURIComponent(escape(atob(d.content)));appendMessage(dec,d.user===userName?'sent':'received',d.user,s.key,r);}catch(e){}});});
-function appendMessage(t,ty,s,m,cr){const cB=document.getElementById('chat-box');const mD=document.createElement('div');mD.className=`msg ${ty}`;let dR=(s===_0x301a[6])?"FOUNDER":cr;let rC=(s===_0x301a[6])?"founder":"custom";let nC=(s===_0x301a[6])?"founder-name":"";let act='<div class="msg-actions">';if(ty==='sent'||isFounder)act+=`<button class="action-btn" onclick="database.ref('${_0x301a[9]}${m}').remove()">DEL</button>`;if(isFounder&&ty==='received')act+=`<button class="action-btn" onclick="database.ref('${_0x301a[7]}${s.replace(/\s/g,'_')}').remove()">KICK</button>`;act+='</div>';mD.innerHTML=`${act}<span class="sender-tag ${nC}" onclick="setRank('${s}')">${s}<span class="rank ${rC}">[${dR}]</span></span><span>${t}</span>`;cB.appendChild(mD);cB.scrollTop=cB.scrollHeight;}
-document.getElementById('sendBtn').onclick=sendMessage;document.getElementById('messageInput').onkeypress=(e)=>{if(e.key==='Enter')sendMessage();};
-</script></body></html>
+    // بروتوكول الحماية والدخول
+    const urlParams = new URLSearchParams(window.location.search);
+    const hasAuth = urlParams.get('auth') === 'true';
+    if (sessionStorage.getItem("ATOM_ACCESS_TOKEN") !== "VERIFIED_USER_30" && !hasAuth) {
+        window.location.href = "index.html"; 
+    }
+</script>
+<head>
+    <meta charset="UTF-8">
+    <title>ATOM | GHOST_CHAT_V3</title>
+    <style>
+        body { background: #000; color: #00ff41; font-family: 'Courier New', monospace; margin: 0; display: flex; flex-direction: column; height: 100vh; overflow: hidden; }
+        .chat-header { padding: 15px; border-bottom: 1px solid #00ff41; text-align: center; font-weight: bold; background: rgba(0,255,65,0.05); letter-spacing: 2px; position: relative; }
+        #user-count { position: absolute; right: 20px; font-size: 0.7rem; color: #ff0000; display: none; }
+        #chat-box { flex: 1; overflow-y: auto; padding: 20px; display: flex; flex-direction: column; gap: 12px; }
+        .msg { max-width: 80%; padding: 10px 15px; border: 1px solid #004400; position: relative; border-radius: 2px; font-size: 0.95rem; }
+        .msg.sent { align-self: flex-end; background: rgba(0, 26, 0, 0.8); border-color: #00ff41; }
+        .msg.received { align-self: flex-start; background: rgba(5, 5, 5, 0.9); border-color: #004400; }
+        .sender-tag { display: block; font-size: 0.7rem; color: #008f11; margin-bottom: 4px; font-weight: bold; cursor: pointer; }
+        .rank { color: #fff; margin-left: 5px; font-size: 0.6rem; border: 1px solid #fff; padding: 0 3px; text-transform: uppercase; }
+        .rank.founder { color: #ff0000; border-color: #ff0000; box-shadow: 0 0 5px #ff0000; }
+        .sender-tag.founder-name { color: #ff0000 !important; text-shadow: 0 0 8px #ff0000; }
+        .msg-actions { display: none; position: absolute; top: -12px; right: 5px; gap: 4px; background: #000; }
+        .msg:hover .msg-actions { display: flex; }
+        .action-btn { background: #000; border: 1px solid #00ff41; color: #00ff41; font-size: 9px; cursor: pointer; }
+        .input-area { padding: 15px; display: flex; gap: 10px; border-top: 1px solid #004400; }
+        input { flex: 1; background: #000; border: 1px solid #004400; color: #00ff41; padding: 12px; outline: none; }
+        button#sendBtn { background: #00ff41; color: #000; border: none; padding: 0 30px; font-weight: bold; cursor: pointer; }
+    </style>
+</head>
+<body>
+    <audio id="snd-send" src="https://www.soundjay.com/communication/sounds/typewriter-key-1.mp3"></audio>
+    <audio id="snd-recv" src="https://www.soundjay.com/communication/sounds/beep-07.mp3"></audio>
+    <div class="chat-header">>> ATOM_GHOST_NETWORK <span id="user-count">CORE_LOAD: 0/100</span></div>
+    <div id="chat-box"></div>
+    <div class="input-area">
+        <input type="text" id="messageInput" placeholder="ENTER_DATA..." autocomplete="off">
+        <button id="sendBtn">EXECUTE</button>
+    </div>
+
+    <script src="https://www.gstatic.com/firebasejs/9.6.10/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.6.10/firebase-database-compat.js"></script>
+
+    <script>
+        const firebaseConfig = {
+            apiKey: "AIzaSyBp8XVk_7Ga-RCq-p8qGbDE0RYk4F7Nv-A",
+            authDomain: "atom-project-b365a.firebaseapp.com",
+            databaseURL: "https://atom-project-b365a-default-rtdb.firebaseio.com",
+            projectId: "atom-project-b365a",
+            storageBucket: "atom-project-b365a.firebasestorage.app",
+            messagingSenderId: "1091970425286",
+            appId: "1:1091970425286:web:accf6681e33115f8d3d2c7",
+            measurementId: "G-K6EJTBHX2J"
+        };
+
+        firebase.initializeApp(firebaseConfig);
+        const database = firebase.database();
+        const userName = urlParams.get('user') || "Unknown_Agent";
+        const isFounder = (userName === "Detective 001");
+
+        if (isFounder) document.getElementById('user-count').style.display = "inline";
+
+        const uCN = userName.replace(/\s/g, '_');
+        database.ref('active_users/' + uCN).set({ name: userName });
+        database.ref('active_users/' + uCN).onDisconnect().remove();
+
+        // نظام الرتب
+        function setRank(t) {
+            if (!isFounder) return;
+            const r = prompt(`Set rank for ${t}:`);
+            if (r) database.ref('user_ranks/' + t.replace(/\s/g, '_')).set(r.toUpperCase());
+        }
+
+        database.ref('active_users').on('value', (s) => {
+            const c = s.numChildren();
+            document.getElementById('user-count').innerText = `CORE_LOAD: ${c}/100`;
+        });
+
+        function sendMessage() {
+            const i = document.getElementById('messageInput');
+            const t = i.value.trim();
+            if (!t) return;
+            if (isFounder && t === "/clear") { database.ref('messages/').remove(); i.value = ''; return; }
+            const e = btoa(unescape(encodeURIComponent(t))); 
+            database.ref('messages/').push({ user: userName, content: e, time: Date.now() });
+            i.value = '';
+        }
+
+        database.ref('messages/').limitToLast(50).on('child_added', (snapshot) => {
+            const data = snapshot.val();
+            database.ref('user_ranks/' + data.user.replace(/\s/g, '_')).once('value', (rankSnap) => {
+                const userRank = rankSnap.val() || "AGENT";
+                try {
+                    const dec = decodeURIComponent(escape(atob(data.content)));
+                    appendMessage(dec, data.user === userName ? 'sent' : 'received', data.user, snapshot.key, userRank);
+                } catch(e) {}
+            });
+        });
+
+        database.ref('messages/').on('child_removed', () => { location.reload(); });
+
+        function appendMessage(t, ty, s, m, cr) {
+            const cB = document.getElementById('chat-box');
+            const mD = document.createElement('div');
+            mD.className = `msg ${ty}`;
+            let dR = (s === "Detective 001") ? "FOUNDER" : cr;
+            let rC = (s === "Detective 001") ? "founder" : "custom";
+            let nC = (s === "Detective 001") ? "founder-name" : "";
+
+            let act = '<div class="msg-actions">';
+            if (ty === 'sent' || isFounder) act += `<button class="action-btn" onclick="database.ref('messages/${m}').remove()">DEL</button>`;
+            if (isFounder && ty === 'received') act += `<button class="action-btn" onclick="database.ref('active_users/${s.replace(/\s/g,'_')}').remove()">KICK</button>`;
+            act += '</div>';
+
+            mD.innerHTML = `${act}<span class="sender-tag ${nC}" onclick="setRank('${s}')">${s}<span class="rank ${rC}">[${dR}]</span></span><span>${t}</span>`;
+            cB.appendChild(mD);
+            cB.scrollTop = cB.scrollHeight;
+        }
+
+        document.getElementById('sendBtn').onclick = sendMessage;
+        document.getElementById('messageInput').onkeypress = (e) => { if (e.key === 'Enter') sendMessage(); };
+    </script>
+</body>
+</html>
