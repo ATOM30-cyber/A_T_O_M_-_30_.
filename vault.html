@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ATOM | THE FINAL VAULT</title>
+    <style>
+        body { background: #050505; color: #00ff41; font-family: 'Courier New', monospace; display: flex; justify-content: center; align-items: center; height: 100vh; margin: 0; overflow: hidden; }
+        .vault-container { border: 2px solid #00ff41; padding: 40px; box-shadow: 0 0 25px #00ff41; text-align: center; background: rgba(0, 255, 65, 0.02); max-width: 400px; width: 90%; }
+        h1 { font-size: 1.4rem; letter-spacing: 3px; margin-bottom: 25px; text-shadow: 0 0 10px #00ff41; }
+        .input-group { margin-bottom: 15px; text-align: left; }
+        label { display: block; font-size: 0.8rem; margin-bottom: 5px; color: #008f11; }
+        input { background: rgba(0, 0, 0, 0.5); border: 1px solid #00ff41; color: #00ff41; padding: 12px; font-size: 1rem; text-align: center; outline: none; width: 100%; box-sizing: border-box; }
+        button { background: #00ff41; color: #000; border: none; padding: 15px 40px; cursor: pointer; font-weight: bold; width: 100%; margin-top: 10px; transition: 0.3s; }
+        button:hover { background: #fff; box-shadow: 0 0 20px #fff; }
+        #status { margin-top: 20px; font-size: 0.9rem; min-height: 20px; }
+        .glitch { animation: glitch 1.5s infinite; }
+        @keyframes glitch { 0% { transform: skew(0deg); } 20% { transform: skew(-1deg); } 40% { transform: skew(1deg); } 100% { transform: skew(0deg); } }
+    </style>
+</head>
+<body>
+
+<div class="vault-container">
+    <h1 class="glitch">CORE_SECTOR_LOCK</h1>
+    <div class="input-group">
+        <label>IDENTIFIER (USED IN C++):</label>
+        <input type="text" id="userName" placeholder="ENTER NAME" autocomplete="off" readonly>
+    </div>
+    <div class="input-group">
+        <label>UNIQUE ACCESS KEY:</label>
+        <input type="text" id="accessKey" placeholder="AT-XXXXXX" readonly>
+    </div>
+    <button onclick="validateAccess()">INITIALIZE BREACH</button>
+    <div id="status">SYSTEM_IDLE...</div>
+</div>
+
+<script>
+    // Encrypted Constants: [jesus2006, welcom.html?user=, ATOM_ACCESS_TOKEN, VERIFIED_USER_30, Detective 001]
+    const _0x5a = ['\x6a\x65\x73\x75\x73\x32\x30\x30\x36', '\x77\x65\x6c\x63\x6f\x6d\x2e\x68\x74\x6d\x6c\x3f\x75\x73\x65\x72\x3d', '\x41\x54\x4f\x4d\x5f\x41\x43\x43\x45\x53\x53\x5f\x54\x4f\x4b\x45\x4e', '\x56\x45\x52\x49\x46\x49\x45\x44\x5f\x55\x53\x45\x52\x5f\x33\x30', '\x44\x65\x74\x65\x63\x74\x69\x76\x65\x20\x30\x30\x31'];
+
+    window.onload = function() {
+        const urlParams = new URLSearchParams(window.location.search);
+        document.getElementById('userName').value = urlParams.get('user') || "";
+        document.getElementById('accessKey').value = urlParams.get('key') || "";
+    };
+
+    function validateAccess() {
+        const name = document.getElementById('userName').value.trim();
+        const userKey = document.getElementById('accessKey').value.trim();
+        const status = document.getElementById('status');
+
+        if (!name || !userKey) { updateStatus("MISSING_DATA", "yellow"); return; }
+
+        // --- THE BYPASS LOGIC ---
+        let isAuthorized = false;
+
+        if (name === _0x5a[4] && userKey === _0x5a[0]) {
+            // Founder Bypass
+            isAuthorized = true;
+        } else {
+            // Normal User Hash Check
+            let hash = 0x811c9dc5;
+            for (let i = 0; i < name.length; i++) {
+                hash ^= name.charCodeAt(i);
+                hash = Math.imul(hash, 0x01000193);
+            }
+            const expected = "AT-" + Math.abs(hash % 999999);
+            if (userKey === expected) isAuthorized = true;
+        }
+
+        if (isAuthorized) {
+            updateStatus("BREACH_SUCCESSFUL. REDIRECTING...", "#fff");
+            document.querySelector('.vault-container').style.boxShadow = "0 0 40px #fff";
+            sessionStorage.setItem(_0x5a[2], _0x5a[3]);
+            
+            setTimeout(() => {
+                window.location.href = _0x5a[1] + encodeURIComponent(name); 
+            }, 2000);
+        } else {
+            updateStatus("ACCESS_DENIED: LOGIC_ERROR", "red");
+            document.querySelector('.vault-container').style.borderColor = "red";
+            setTimeout(() => {
+                document.querySelector('.vault-container').style.borderColor = "#00ff41";
+                updateStatus("SYSTEM_IDLE...", "#00ff41");
+            }, 1500);
+        }
+    }
+
+    function updateStatus(msg, color) {
+        const status = document.getElementById('status');
+        status.innerText = msg;
+        status.style.color = color;
+    }
+</script>
+</body>
+</html>

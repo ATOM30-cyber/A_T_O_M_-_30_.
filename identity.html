@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>ATOM | IDENTITY_GATE</title>
+    <style>
+        body{background:#000;color:#00ff41;font-family:monospace;display:flex;justify-content:center;align-items:center;height:100vh;margin:0;overflow:hidden;}
+        .g-c{border:1px solid #00ff41;padding:40px;width:450px;text-align:center;box-shadow:0 0 20px #004400;}
+        input{background:#000;border:none;border-bottom:1px solid #00ff41;color:#00ff41;padding:10px;width:80%;text-align:center;outline:none;margin-top:20px;display:none;}
+        #st{margin-top:20px;font-size:0.8rem;min-height:60px;color:#00ff41;}
+        .btn{background:transparent;border:1px solid #00ff41;color:#00ff41;padding:10px 30px;cursor:pointer;margin:10px;}
+        .btn:hover{background:#00ff41;color:#000;}
+    </style>
+</head>
+<body>
+<div class="g-c">
+    <h1 id="q">DO YOU BELIEVE PRIVACY IS A RIGHT FOR EVERYONE?</h1>
+    <div id="ax"><button class="btn" onclick="hR(true)">YES</button><button class="btn" onclick="hR(false)">NO</button></div>
+    <input type="text" id="an" placeholder="AGENT_NAME">
+    <div id="st">>> LOGIC_AWAITING...</div>
+</div>
+<script>
+    const _v = ['\x6a\x65\x73\x75\x73\x32\x30\x30\x36', '\x76\x61\x75\x6c\x74\x2e\x68\x74\x6d\x6c\x3f\x75\x73\x65\x72\x3d', '\x26\x6b\x65\x79\x3d', '\x41\x54\x2d', '\x44\x65\x74\x65\x63\x74\x69\x76\x65\x20\x30\x30\x31'];
+    function hR(b){
+        if(!b){location.reload();return;}
+        document.getElementById('ax').style.display="none";
+        const i=document.getElementById('an'), s=document.getElementById('st');
+        i.style.display="inline-block"; i.focus();
+        i.onkeypress=function(e){
+            if(e.key==='Enter'){
+                const n=i.value.trim(); if(!n)return;
+                if(n === _v[4]){ // IF NAME IS Detective 001
+                    const p = prompt("ENTER FOUNDER PRIVILEGE KEY:");
+                    if(p === _v[0]){
+                        s.innerHTML = `>> FOUNDER_DETECTED. REDIRECTING...`;
+                        setTimeout(()=> { window.location.href=_v[1]+encodeURIComponent(n)+_v[2]+_v[0]; }, 2000);
+                    } else {
+                        s.style.color="red"; s.innerText=">> IMPOSTER DETECTED. SYSTEM LOCK.";
+                        setTimeout(()=>location.reload(), 3000);
+                    }
+                } else { // NORMAL USERS
+                    let h=0x811c9dc5; for(let j=0;j<n.length;j++){h^=n.charCodeAt(j);h=Math.imul(h,0x01000193);}
+                    const k=_v[3]+Math.abs(h%999999);
+                    s.innerHTML = `>> IDENTITY_CONFIRMED: ${n}<br>>> SYSTEM_KEY: ${k}`;
+                    setTimeout(()=> { window.location.href=_v[1]+encodeURIComponent(n)+_v[2]+k; }, 4000);
+                }
+            }
+        };
+    }
+</script>
+</body>
+</html>
