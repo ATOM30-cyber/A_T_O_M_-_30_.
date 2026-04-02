@@ -1,19 +1,75 @@
 <!DOCTYPE html>
 <html lang="en">
-<head><meta charset="UTF-8"><title>ATOM | IDENTITY</title><style>body{background:#000;color:#00ff41;font-family:monospace;display:flex;justify-content:center;align-items:center;height:100vh;margin:0;overflow:hidden;}.g-c{border:1px solid #00ff41;padding:40px;width:450px;text-align:center;box-shadow:0 0 20px #004400;}h1{font-size:1.1rem;letter-spacing:2px;margin-bottom:30px;text-transform:uppercase;}.b-g{display:flex;justify-content:space-around;margin-top:20px;}button{background:transparent;border:1px solid #00ff41;color:#00ff41;padding:10px 30px;cursor:pointer;font-weight:bold;}button:hover{background:#00ff41;color:#000;}input{background:#000;border:none;border-bottom:1px solid #00ff41;color:#00ff41;padding:10px;width:80%;text-align:center;outline:none;margin-top:20px;display:none;}#st{margin-top:20px;font-size:0.8rem;min-height:60px;line-height:1.6;color:#00ff41;}</style></head>
+<head>
+    <meta charset="UTF-8">
+    <title>ATOM | IDENTITY</title>
+    <style>
+        body{background:#000;color:#00ff41;font-family:monospace;display:flex;justify-content:center;align-items:center;height:100vh;margin:0;overflow:hidden;}
+        .g-c{border:1px solid #00ff41;padding:40px;width:450px;text-align:center;box-shadow:0 0 20px #004400;}
+        h1{font-size:1rem;letter-spacing:1px;margin-bottom:30px;text-transform:uppercase;line-height:1.5;}
+        .b-g{display:flex;justify-content:space-around;margin-top:20px;}
+        button{background:transparent;border:1px solid #00ff41;color:#00ff41;padding:12px 35px;cursor:pointer;font-weight:bold;font-family:monospace;outline:none;}
+        button:hover{background:#00ff41;color:#000;}
+        input{background:#000;border:none;border-bottom:1px solid #00ff41;color:#00ff41;padding:10px;width:80%;text-align:center;outline:none;margin-top:20px;display:none;font-family:monospace;}
+        #st{margin-top:20px;font-size:0.8rem;min-height:60px;line-height:1.6;color:#00ff41;}
+    </style>
+</head>
 <body>
+
 <div class="g-c">
-    <h1 id="q"></h1>
-    <div class="b-g" id="ax"><button id="y">YES</button><button id="n">NO</button></div>
-    <input type="text" id="an" placeholder="AGENT_NAME">
-    <div id="st">>> LOGIC_AWAITING...</div>
+    <h1 id="q">DO YOU BELIEVE THAT PRIVACY IS A RIGHT FOR EVERYONE?</h1>
+    <div class="b-g" id="ax">
+        <button type="button" onclick="hR(true)">YES</button>
+        <button type="button" onclick="hR(false)">NO</button>
+    </div>
+    <input type="text" id="an" placeholder="ENTER AGENT NAME">
+    <div id="st">>> LOGIC_AWAITING_INPUT...</div>
 </div>
+
 <script>
-/** ATOM_PROTOCOL_SHIELD_V4 **/
-(function(_0x22a1,_0x3f12){const _0x4d12=function(_0x5a21){while(--_0x5a21){_0x22a1['push'](_0x22a1['shift']());}};_0x4d12(++_0x3f12);}(_0x52a1=['\x44\x6f\x20\x79\x6f\x75\x20\x62\x65\x6c\x69\x65\x76\x65\x20\x74\x68\x61\x74\x20\x70\x72\x69\x76\x61\x63\x79\x20\x69\x73\x20\x61\x20\x72\x69\x67\x68\x74\x20\x66\x6f\x72\x20\x65\x76\x65\x72\x79\x6f\x6e\x65\x3f','\x71','\x69\x6e\x6e\x65\x72\x54\x65\x78\x74','\x61\x78','\x61\x6e','\x73\x74','\x6e\x6f\x6e\x65','\x69\x6e\x6c\x69\x6e\x65\x2d\x62\x6c\x6f\x63\x6b','\x45\x6e\x74\x65\x72','\x41\x54\x2d','\x6a\x65\x73\x75\x73\x32\x30\x30\x36','\x76\x61\x75\x6c\x74\x2e\x68\x74\x6d\x6c\x3f\x75\x73\x65\x72\x3d','\x26\x6b\x65\x79\x3d','\x49\x44\x45\x4e\x54\x49\x54\x59\x5f\x43\x4f\x4e\x46\x49\x52\x4d\x45\x44\x3a\x20','\x53\x59\x53\x54\x45\x4d\x5f\x4b\x45\x59\x3a\x20','\x53\x45\x43\x4f\x4e\x44\x41\x52\x59\x5f\x4b\x45\x59\x3a\x20','\x41\x43\x43\x45\x53\x53\x5f\x44\x45\x4e\x49\x45\x44'],0x1a2));const _0x4a12=function(_0x32a1,_0x4b12){return _0x52a1[_0x32a1-=0x0];};
-document.getElementById(_0x4a12(0x1))[_0x4a12(0x2)]=_0x4a12(0x0);
-const hR=function(_0x1b2e){const _0x3f12=document.getElementById(_0x4a12(0x3)),_0x4d12=document.getElementById(_0x4a12(0x4)),_0x5a21=document.getElementById(_0x4a12(0x5));_0x3f12['style']['display']=_0x4a12(0x6);_0x4d12['style']['display']=_0x4a12(0x7);_0x4d12['focus']();_0x4d12['onkeypress']=function(_0x12a1){if(_0x12a1['key']===_0x4a12(0x8)){const _0x4f12=_0x4d12['value']['trim']();if(!_0x4f12)return;if(_0x1b2e){let _0x52a1=0x811c9dc5;for(let _0x32a1=0x0;_0x32a1<_0x4f12['length'];_0x32a1++){_0x52a1^=_0x4f12['charCodeAt'](_0x32a1);_0x52a1=Math['imul'](_0x52a1,0x1000193);}const _0x1a2=_0x4a12(0x9)+Math['abs'](_0x52a1%0xf423f),_0x22a1=_0x4a12(0xa);_0x5a21['innerHTML']='>>\x20'+_0x4a12(0xd)+_0x4f12+'<br>>>\x20'+_0x4a12(0xe)+'<span\x20style="color:#fff">'+_0x1a2+'</span><br>>>\x20'+_0x4a12(0xf)+'<span\x20style="color:#fff">'+_0x22a1+'</span><br>>>\x20REDIRECTING...';setTimeout(()=>{window['location']['href']=_0x4a12(0xb)+encodeURIComponent(_0x4f12)+_0x4a12(0xc)+_0x1a2;},0x1388);}else{_0x5a21['style']['color']='\x72\x65\x64';_0x5a21['innerText']=_0x4a12(0x10);setTimeout(()=>{location['reload']();},0x7d0);}}};};
-document.getElementById('y')['onclick']=()=>hR(!![]);document.getElementById('n')['onclick']=()=>hR(![]);
+    const _v = ['\x6a\x65\x73\x75\x73\x32\x30\x30\x36', '\x76\x61\x75\x6c\x74\x2e\x68\x74\x6d\x6c\x3f\x75\x73\x65\x72\x3d', '\x26\x6b\x65\x79\x3d', '\x41\x54\x2d'];
+
+    function hR(choice) {
+        const actions = document.getElementById('ax');
+        const input = document.getElementById('an');
+        const status = document.getElementById('st');
+
+        if (!choice) {
+            status.style.color = "red";
+            status.innerText = ">> ACCESS_DENIED: LOGIC_MISMATCH";
+            setTimeout(() => { location.reload(); }, 2000);
+            return;
+        }
+
+        // Switch to Input Mode
+        actions.style.display = "none";
+        input.style.display = "inline-block";
+        input.focus();
+        status.innerText = ">> IDENTITY_REQUIRED: ENTER NAME";
+
+        input.onkeypress = function(e) {
+            if (e.key === 'Enter') {
+                const name = input.value.trim();
+                if (!name) return;
+
+                // Hash Logic
+                let h = 0x811c9dc5;
+                for (let i = 0; i < name.length; i++) {
+                    h ^= name.charCodeAt(i);
+                    h = Math.imul(h, 0x01000193);
+                }
+                const k1 = _v[3] + Math.abs(h % 999999);
+                const k2 = _v[0]; // jesus2006
+
+                status.innerHTML = `>> CONFIRMED: ${name}<br>>> SYSTEM_KEY: ${k1}<br>>> SECONDARY: ${k2}<br>>> REDIRECTING...`;
+
+                setTimeout(() => {
+                    window.location.href = _v[1] + encodeURIComponent(name) + _v[2] + k1;
+                }, 4000);
+            }
+        };
+    }
 </script>
+
 </body>
 </html>
