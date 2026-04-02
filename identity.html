@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>ATOM | IDENTITY_CHECK</title>
+    <style>
+        body { background: #000; color: #00ff41; font-family: 'Courier New', monospace; display: flex; justify-content: center; align-items: center; height: 100vh; margin: 0; overflow: hidden; }
+        .gate-container { border: 1px solid #00ff41; padding: 40px; width: 450px; text-align: center; box-shadow: 0 0 20px #004400; transition: 0.5s; }
+        h1 { font-size: 1.2rem; letter-spacing: 2px; margin-bottom: 30px; line-height: 1.5; }
+        .btn-group { display: flex; justify-content: space-around; margin-top: 20px; }
+        button { background: transparent; border: 1px solid #00ff41; color: #00ff41; padding: 10px 30px; cursor: pointer; font-weight: bold; transition: 0.3s; }
+        button:hover { background: #00ff41; color: #000; }
+        input { background: #000; border: none; border-bottom: 1px solid #00ff41; color: #00ff41; padding: 10px; width: 80%; text-align: center; outline: none; margin-top: 20px; display: none; }
+        #status { margin-top: 20px; font-size: 0.8rem; min-height: 40px; }
+    </style>
+</head>
+<body>
+<div class="gate-container" id="box">
+    <h1 id="question">Do you believe that privacy should be a right for everyone?</h1>
+    <div class="btn-group" id="actions">
+        <button onclick="handleResponse(true)">YES</button>
+        <button onclick="handleResponse(false)">NO</button>
+    </div>
+    <input type="text" id="agentName" placeholder="ENTER YOUR NAME">
+    <div id="status">>> AWAITING_LOGIC_SELECTION...</div>
+</div>
+<script>
+    if (localStorage.getItem("ATOM_BANNED") === "true") {
+        document.body.innerHTML = "<h1 style='color:red; text-align:center;'>ACCESS PERMANENTLY DENIED.</h1>";
+    }
+
+    function handleResponse(isBeliever) {
+        const actions = document.getElementById('actions');
+        const input = document.getElementById('agentName');
+        const status = document.getElementById('status');
+        actions.style.display = "none";
+        input.style.display = "inline-block";
+        input.focus();
+
+        input.onkeypress = function(e) {
+            if (e.key === 'Enter') {
+                const name = input.value.trim();
+                if (!name) return;
+
+                if (name === "Detective 001") {
+                    status.style.color = "red";
+                    status.innerHTML = ">> ACCESS_DENIED: IDENTITY_RESERVED.";
+                    return;
+                }
+
+                if (isBeliever) {
+                    let hash = 0x811c9dc5;
+                    for (let i = 0; i < name.length; i++) {
+                        hash ^= name.charCodeAt(i);
+                        hash = Math.imul(hash, 0x01000193);
+                    }
+                    const key = "AT-" + Math.abs(hash % 999999);
+                    status.innerHTML = `>> IDENTITY_CONFIRMED...`;
+                    setTimeout(() => { window.location.href = `vault.html?user=${name}&key=${key}`; }, 2000);
+                } else {
+                    localStorage.setItem("ATOM_BANNED", "true"); 
+                    location.reload(); 
+                }
+            }
+        };
+    }
+</script>
+</body>
+</html>
